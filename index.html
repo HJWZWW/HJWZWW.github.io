@@ -270,12 +270,12 @@ mjx-container[display="true"] + br {
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -433,8 +433,9 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-12-25 11:14:18" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:18+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:14:18 / 修改时间：22:46:59" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:18+08:00">2022-12-25</time>
     </span>
 
   
@@ -447,8 +448,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          
-
+          <p>resnet_main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主程序 1, 3, 4</span></span><br><span class="line"><span class="comment"># 1 导入数据 2 创建网络 3 训练网络 4 测试验证</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="comment"># 导入数据集</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets</span><br><span class="line"><span class="comment"># 对数据做变形，变换</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="comment"># 加载数据</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="comment"># 常见的神经网络相关模块</span></span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, optim</span><br><span class="line"><span class="comment"># 导入自己构建的模型</span></span><br><span class="line"><span class="keyword">from</span> resnet <span class="keyword">import</span> ResNet18</span><br><span class="line"><span class="comment"># 损失函数</span></span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    cifar_train = datasets.CIFAR10(</span><br><span class="line">        root=<span class="string">&quot;/media/D/dataset/CIFAR10&quot;</span>,</span><br><span class="line">        train=<span class="literal">True</span>,</span><br><span class="line">        transform=transforms.Compose([</span><br><span class="line">            <span class="comment"># 将照片转化成32*32的特征图</span></span><br><span class="line">            transforms.Resize((<span class="number">32</span>, <span class="number">32</span>)),</span><br><span class="line">            <span class="comment"># 将数据转化成tensor</span></span><br><span class="line">            transforms.ToTensor(),</span><br><span class="line">            transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                                 std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">        ]), download=<span class="literal">False</span>)</span><br><span class="line">    cifar_train = DataLoader(</span><br><span class="line">        dataset=cifar_train,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">    )</span><br><span class="line">    cifar_test = datasets.CIFAR10(</span><br><span class="line">        root=<span class="string">&quot;/media/D/dataset/CIFAR10&quot;</span>,</span><br><span class="line">        train=<span class="literal">False</span>,</span><br><span class="line">        transform=transforms.Compose([</span><br><span class="line">            <span class="comment"># 将照片转化成32*32的特征图</span></span><br><span class="line">            transforms.Resize((<span class="number">32</span>, <span class="number">32</span>)),</span><br><span class="line">            <span class="comment"># 将数据转化成tensor</span></span><br><span class="line">            transforms.ToTensor(),</span><br><span class="line">            transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                                 std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">        ]), download=<span class="literal">False</span>)</span><br><span class="line">    cifar_test = DataLoader(</span><br><span class="line">        dataset=cifar_test,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 对数据预览 iter()方法得到数据集的迭代器，next()生成取出数据</span></span><br><span class="line">    x, label = <span class="built_in">iter</span>(cifar_train).<span class="built_in">next</span>()</span><br><span class="line">    <span class="built_in">print</span>(x.shape, label.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 训练网络</span></span><br><span class="line">    device = torch.device(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line">    <span class="comment"># 实例化网络</span></span><br><span class="line">    model = ResNet18().to(device)</span><br><span class="line">    <span class="comment"># 构建CrossEntropyLoss损失函数(包含了Softmax), 需要构建函数名, 不能直接使用</span></span><br><span class="line">    criterion = nn.CrossEntropyLoss().to(device)</span><br><span class="line">    <span class="comment"># 构建优化器:优化器自己选择需要梯度的参数</span></span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">        model.train()</span><br><span class="line">        <span class="keyword">for</span> batch_idx, (x, label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cifar_train):</span><br><span class="line">            <span class="comment"># 将训练集放入模型</span></span><br><span class="line">            x, label = x.to(device), label.to(device)</span><br><span class="line">            logits = model(x)</span><br><span class="line">            <span class="comment"># 计算loss:交叉熵损失函数</span></span><br><span class="line">            loss = criterion(logits, label)</span><br><span class="line">            <span class="comment"># 优化迭代老三样</span></span><br><span class="line">            <span class="comment"># 梯度清零</span></span><br><span class="line">            optimizer.zero_grad()</span><br><span class="line">            <span class="comment"># 梯度计算</span></span><br><span class="line">            loss.backward()</span><br><span class="line">            <span class="comment"># 梯度迭代更新</span></span><br><span class="line">            optimizer.step()</span><br><span class="line">        <span class="built_in">print</span>(epoch, loss.item())</span><br><span class="line">        <span class="comment"># 测试数据, 测试集的数据拿来作验证</span></span><br><span class="line">        model.<span class="built_in">eval</span>()</span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            total_correct = <span class="number">0</span></span><br><span class="line">            total_num = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> x, label <span class="keyword">in</span> cifar_test:</span><br><span class="line">                x, label = x.to(device), label.to(device)</span><br><span class="line">                logits = model(x)</span><br><span class="line">                <span class="comment"># logits = F.softmax(logits, dim=1)</span></span><br><span class="line">                pred = logits.argmax(dim=<span class="number">1</span>)</span><br><span class="line">                correct = torch.eq(pred, label).<span class="built_in">float</span>().<span class="built_in">sum</span>().item()</span><br><span class="line"></span><br><span class="line">                total_correct += correct</span><br><span class="line">                total_num += x.size(<span class="number">0</span>)</span><br><span class="line">            acc = total_correct / total_num</span><br><span class="line">            <span class="built_in">print</span>(epoch, acc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/25/%E6%89%8B%E5%86%99ResNet/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -502,8 +511,9 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-12-25 11:14:03" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:03+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:14:03 / 修改时间：22:45:42" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:03+08:00">2022-12-25</time>
     </span>
 
   
@@ -516,8 +526,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          
-
+          <p>Lenet5_main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主程序 1, 3, 4</span></span><br><span class="line"><span class="comment"># 1 导入数据 2 创建网络 3 训练网络 4 测试验证</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="comment"># 导入数据集</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets</span><br><span class="line"><span class="comment"># 对数据做变形，变换</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="comment"># 加载数据</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="comment"># 常见的神经网络相关模块</span></span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, optim</span><br><span class="line"><span class="comment"># 导入自己构建的模型</span></span><br><span class="line"><span class="keyword">from</span> Lenet5 <span class="keyword">import</span> Lenet5</span><br><span class="line"><span class="comment"># 损失函数</span></span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    cifar_train = datasets.CIFAR10(</span><br><span class="line">        root=<span class="string">&quot;/media/D/dataset/CIFAR10&quot;</span>,</span><br><span class="line">        train=<span class="literal">True</span>,</span><br><span class="line">        transform=transforms.Compose([</span><br><span class="line">            <span class="comment"># 将照片转化成32*32的特征图</span></span><br><span class="line">            transforms.Resize((<span class="number">32</span>, <span class="number">32</span>)),</span><br><span class="line">            <span class="comment"># 将数据转化成tensor</span></span><br><span class="line">            transforms.ToTensor(),</span><br><span class="line">            transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                                 std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">        ]), download=<span class="literal">False</span>)</span><br><span class="line">    cifar_train = DataLoader(</span><br><span class="line">        dataset=cifar_train,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">    )</span><br><span class="line">    cifar_test = datasets.CIFAR10(</span><br><span class="line">        root=<span class="string">&quot;/media/D/dataset/CIFAR10&quot;</span>,</span><br><span class="line">        train=<span class="literal">False</span>,</span><br><span class="line">        transform=transforms.Compose([</span><br><span class="line">            <span class="comment"># 将照片转化成32*32的特征图</span></span><br><span class="line">            transforms.Resize((<span class="number">32</span>, <span class="number">32</span>)),</span><br><span class="line">            <span class="comment"># 将数据转化成tensor</span></span><br><span class="line">            transforms.ToTensor(),</span><br><span class="line">            transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                                 std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">        ]), download=<span class="literal">False</span>)</span><br><span class="line">    cifar_test = DataLoader(</span><br><span class="line">        dataset=cifar_test,</span><br><span class="line">        batch_size=batch_size,</span><br><span class="line">        shuffle=<span class="literal">True</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 对数据预览 iter()方法得到数据集的迭代器，next()生成取出数据</span></span><br><span class="line">    x, label = <span class="built_in">iter</span>(cifar_train).<span class="built_in">next</span>()</span><br><span class="line">    <span class="built_in">print</span>(x.shape, label.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 训练网络</span></span><br><span class="line">    device = torch.device(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line">    <span class="comment"># 实例化网络</span></span><br><span class="line">    model = Lenet5().to(device)</span><br><span class="line">    <span class="comment"># 构建CrossEntropyLoss损失函数(包含了Softmax), 需要构建函数名, 不能直接使用</span></span><br><span class="line">    criterion = nn.CrossEntropyLoss().to(device)</span><br><span class="line">    <span class="comment"># 构建优化器:优化器自己选择需要梯度的参数</span></span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">        model.train()</span><br><span class="line">        <span class="keyword">for</span> batch_idx, (x, label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cifar_train):</span><br><span class="line">            <span class="comment"># 将训练集放入模型</span></span><br><span class="line">            x, label = x.to(device), label.to(device)</span><br><span class="line">            logits = model(x)</span><br><span class="line">            <span class="comment"># 计算loss:交叉熵损失函数</span></span><br><span class="line">            loss = criterion(logits, label)</span><br><span class="line">            <span class="comment"># 优化迭代老三样</span></span><br><span class="line">            <span class="comment"># 梯度清零</span></span><br><span class="line">            optimizer.zero_grad()</span><br><span class="line">            <span class="comment"># 梯度计算</span></span><br><span class="line">            loss.backward()</span><br><span class="line">            <span class="comment"># 梯度迭代更新</span></span><br><span class="line">            optimizer.step()</span><br><span class="line">        <span class="built_in">print</span>(epoch, loss.item())</span><br><span class="line">        <span class="comment"># 测试数据, 测试集的数据拿来作验证</span></span><br><span class="line">        model.<span class="built_in">eval</span>()</span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            total_correct = <span class="number">0</span></span><br><span class="line">            total_num = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> x, label <span class="keyword">in</span> cifar_test:</span><br><span class="line">                x, label = x.to(device), label.to(device)</span><br><span class="line">                logits = model(x)</span><br><span class="line">                <span class="comment"># logits = F.softmax(logits, dim=1)</span></span><br><span class="line">                pred = logits.argmax(dim=<span class="number">1</span>)</span><br><span class="line">                correct = torch.eq(pred, label).<span class="built_in">float</span>().<span class="built_in">sum</span>().item()</span><br><span class="line"></span><br><span class="line">                total_correct += correct</span><br><span class="line">                total_num += x.size(<span class="number">0</span>)</span><br><span class="line">            acc = total_correct / total_num</span><br><span class="line">            <span class="built_in">print</span>(epoch, acc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/25/%E6%89%8B%E5%86%99%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -571,8 +589,22 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-12-25 11:13:34" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:34+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:13:34 / 修改时间：22:08:10" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:34+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
     </span>
 
   
@@ -585,8 +617,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          
-
+          <h2 id="u-net的基本结构">U-Net的基本结构</h2>
+<p><img src="C:\Users\HJWZWW\Desktop\大学学习专区\研究生\HJWZWW网站\images\image-20221225175200290.png" alt="image-20221225175200290" style="zoom:80%;"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/25/U-Net/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -640,8 +680,18 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-12-25 11:13:16" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:16+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:13:16 / 修改时间：22:40:46" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:16+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
     </span>
 
   
@@ -654,8 +704,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          
-
+          <h2 id="图形生成指标的要求">0 图形生成指标的要求</h2>
+<p>众所周知，评价生成模型最基本的要考虑以下两方面</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/25/IS%E4%B8%8EFID/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -712,6 +770,22 @@ mjx-container[display="true"] + br {
 
       <time title="创建时间：2022-12-24 17:27:02" itemprop="dateCreated datePublished" datetime="2022-12-24T17:27:02+08:00">2022-12-24</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-25 22:48:05" itemprop="dateModified" datetime="2022-12-25T22:48:05+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -723,8 +797,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          
-
+          <h2 id="概率扩散模型ddpm与分数扩散模型smld的联系与区别">概率扩散模型(DDPM)与分数扩散模型(SMLD)的联系与区别</h2>
+<p>论文发表时间顺序：SMLD→DDPM→SDEs</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/24/DDPM%E4%B8%8ESMLD%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

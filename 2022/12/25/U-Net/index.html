@@ -19,15 +19,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="U-Net的基本结构">
+<meta property="og:type" content="article">
 <meta property="og:title" content="U-Net">
 <meta property="og:url" content="http://example.com/2022/12/25/U-Net/index.html">
 <meta property="og:site_name" content="Taki&#39;s Space">
+<meta property="og:description" content="U-Net的基本结构">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\HJWZWW\Desktop\%E5%A4%A7%E5%AD%A6%E5%AD%A6%E4%B9%A0%E4%B8%93%E5%8C%BA\%E7%A0%94%E7%A9%B6%E7%94%9F\HJWZWW%E7%BD%91%E7%AB%99\images\image-20221225175200290.png">
 <meta property="article:published_time" content="2022-12-25T03:13:34.000Z">
-<meta property="article:modified_time" content="2022-12-25T03:13:34.664Z">
+<meta property="article:modified_time" content="2022-12-25T14:08:10.182Z">
 <meta property="article:author" content="Taki">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\HJWZWW\Desktop\%E5%A4%A7%E5%AD%A6%E5%AD%A6%E4%B9%A0%E4%B8%93%E5%8C%BA\%E7%A0%94%E7%A9%B6%E7%94%9F\HJWZWW%E7%BD%91%E7%AB%99\images\image-20221225175200290.png">
 
 
 <link rel="canonical" href="http://example.com/2022/12/25/U-Net/">
@@ -52,7 +56,119 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -125,7 +241,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -138,6 +254,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u-net%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">U-Net的基本结构</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,12 +275,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -235,8 +352,22 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-12-25 11:13:34" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:34+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:13:34 / 修改时间：22:08:10" itemprop="dateCreated datePublished" datetime="2022-12-25T11:13:34+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+        </span>
     </span>
 
   
@@ -249,7 +380,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h2 id="u-net的基本结构">U-Net的基本结构</h2>
+<p><img src="C:\Users\HJWZWW\Desktop\大学学习专区\研究生\HJWZWW网站\images\image-20221225175200290.png" alt="image-20221225175200290" style="zoom:80%;"></p>
+<p>如图所示，U-Net是由卷积神经网络、下采样模块、上采样模块以及短路连接构成。</p>
+<p>U-Net的左侧被称为编码器，右侧被称为解码器。</p>
+<p>左边做的卷积都是卷积核大小为3×3的卷积，没有padding，卷积步长stride=1，因此我们可以看到图像的尺寸长和宽每经过一次卷积都会缩小2。</p>
+<p>右边的上采样采用了反卷积的方法。短路连接会把左边的高分辨率特征图剪切成相等的大小拼接到右边。最后输出的全连接网络是用1×1的卷积实现的。</p>
 
     </div>
 
