@@ -275,7 +275,7 @@ mjx-container[display="true"] + br {
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -433,9 +433,15 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-12-25 11:14:18 / 修改时间：23:15:01" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:18+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:14:18" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:18+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-26 11:18:28" itemprop="dateModified" datetime="2022-12-26T11:18:28+08:00">2022-12-26</time>
     </span>
 
   
@@ -448,7 +454,20 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>resnet_main.py</p>
+          <h3 id="resnet">ResNet</h3>
+<p>网络退化：层次变深后性能还不如之前的网络（并不是梯度消失或梯度爆炸，也不是过拟合）</p>
+<figure>
+<img src="/2022/12/25/%E6%89%8B%E5%86%99ResNet/image-20221226111804113.png" alt="image-20221226111804113"><figcaption>image-20221226111804113</figcaption>
+</figure>
+<p>右侧的支路也被称为短路连接（shortcut connection）。引入短路连接，既没有引入额外的参数，也没有增加计算复杂度。</p>
+<p>求和之后再用ReLU激活函数。注意输入和输出必须为同维（逐个元素相加）。</p>
+<p>过去是直接拟合<span class="math inline">\(H(x)\)</span>，现在是拟合残差<span class="math inline">\(F(x)=H(x)-x\)</span></p>
+<p>残差块的结构：</p>
+<figure>
+<img src="/2022/12/25/%E6%89%8B%E5%86%99ResNet/image-20221226111612290.png" alt="image-20221226111612290"><figcaption>image-20221226111612290</figcaption>
+</figure>
+<p>残差网络的优点：①易于优化收敛。②解决网络退化问题。③可以使网络变得很深，准确率大大提升。</p>
+<p>resnet_main.py</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/25/%E6%89%8B%E5%86%99ResNet/#more" rel="contents">
@@ -500,7 +519,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/25/%E6%89%8B%E5%86%99%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">手写卷积神经网络</a>
+          <a href="/2022/12/25/%E6%89%8B%E5%86%99%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">PyTorch手写实现卷积神经网络</a>
         </h2>
 
         <div class="post-meta-container">
@@ -510,9 +529,15 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-12-25 11:14:03 / 修改时间：23:15:09" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:03+08:00">2022-12-25</time>
+      <time title="创建时间：2022-12-25 11:14:03" itemprop="dateCreated datePublished" datetime="2022-12-25T11:14:03+08:00">2022-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-26 11:10:53" itemprop="dateModified" datetime="2022-12-26T11:10:53+08:00">2022-12-26</time>
     </span>
 
   
@@ -525,7 +550,16 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Lenet5_main.py</p>
+          <h3 id="卷积神经网络">卷积神经网络</h3>
+<p>深度学习处理的数据一般是[0,1]，而图片数据的取值范围是[0,255]，所以一般导入图片数据的时候做一次预处理/255。</p>
+<p>彩色图片有3个通道，每个通道上都是以[0,255]的数值进行图片对应通道上的存储。</p>
+<p>全连接神经网络参数众多，难以训练，而且容易过拟合，因因此引入了卷积神经网络。</p>
+<p>特征图上的每个数值都是通过上一层的输入通过卷积核计算得到的。</p>
+<p>将卷积层进行层层堆叠，就形成了深度卷积网络。在目前的硬件条件下，可以实现几百上千层的卷积层结构。卷积层越多，对复杂结构的特征识别能力越强。</p>
+<p>激活函数一般是ReLU（把小于零的值剔除）。</p>
+<p>池化层可以放大主要特征，忽略掉几个像素的偏差，抓住主要矛盾，忽略次要矛盾。可以减少数据维度，减少训练参数，避免过拟合。</p>
+<p>批归一化的好处：①收敛速度更快（避免的了梯度离散现象，能更好的的更新参数）②更容易得到更好的解 ③训练更稳定</p>
+<p>Lenet5_main.py</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/25/%E6%89%8B%E5%86%99%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
@@ -848,7 +882,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/24/DDIM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E4%B8%8E%E5%A4%8D%E7%8E%B0/" class="post-title-link" itemprop="url">DDIM论文阅读与复现</a>
+          <a href="/2022/12/24/DDIM%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E4%B8%8E%E5%A4%8D%E7%8E%B0/" class="post-title-link" itemprop="url">DDIM论文阅读</a>
         </h2>
 
         <div class="post-meta-container">
@@ -866,7 +900,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-25 22:47:08" itemprop="dateModified" datetime="2022-12-25T22:47:08+08:00">2022-12-25</time>
+      <time title="修改时间：2023-01-01 11:46:59" itemprop="dateModified" datetime="2023-01-01T11:46:59+08:00">2023-01-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1188,7 +1222,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
