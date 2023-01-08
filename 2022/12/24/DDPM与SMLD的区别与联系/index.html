@@ -377,6 +377,20 @@ mjx-container[display="true"] + br {
     </span>
 
   
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Valine：</span>
+  
+    <a title="valine" href="/2022/12/24/DDPM%E4%B8%8ESMLD%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/12/24/DDPM%E4%B8%8ESMLD%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 </div>
 
         </div>
@@ -446,27 +460,7 @@ mjx-container[display="true"] + br {
 
 
 
-    
-  
-  <div class="comments">
-    <script src="https://giscus.app/client.js"
-        data-repo="HJWZWW/blog_comments" 
-        data-repo-id="R_kgDOIvXhJQ" 
-        data-category="Announcements"
-        data-category-id="DIC_kwDOIvXhJc4CTeJe"
-        data-mapping="pathname" 
-        data-reactions-enabled="1" 
-        data-emit-metadata="1" 
-        data-theme="light"
-        data-lang="zh-C"
-        crossorigin="anonymous"
-        data-input-position="top"
-        data-loading="lazy"
-        async>
-    </script>
-  </div>
-  
-  
+    <div class="comments" id="valine-comments"></div>
 </div>
   </main>
 
@@ -514,6 +508,21 @@ mjx-container[display="true"] + br {
 
 
 
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"cLFe9JJGkakcwASb9llhPCAk-gzGzoHsz","appKey":"KK4YcncyGlmtvY6ZPYSiiqHt","serverURLs":"https://hjwzww.github.io/","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"el":"#valine-comments","path":"/2022/12/24/DDPM%E4%B8%8ESMLD%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
 
 </body>
 </html>
